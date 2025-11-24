@@ -4,12 +4,11 @@
 
 int main()
 {
-	int fd = open("hh.txt", O_RDWR);
+	int fd = open("hh.txt", O_RDONLY);
 	char *line = get_next_line(fd);
 	while (line)
 	{
-		printf("\n*****************************************\n");
-		(printf("%s", line));
+		printf("%s|", line);
 		printf("\n*****************************************\n");
 		free(line);
 		line = get_next_line(fd);
