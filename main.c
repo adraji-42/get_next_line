@@ -4,12 +4,12 @@
 
 int main()
 {
-	int fd = open("hh.txt", O_RDONLY);
+	int i = 0;
+	int fd = open("almoharaf.txt", O_RDONLY);
 	char *line = get_next_line(fd);
 	while (line)
 	{
-		printf("%s|", line);
-		printf("\n*****************************************\n");
+		printf("%s", line);
 		free(line);
 		line = get_next_line(fd);
 	}

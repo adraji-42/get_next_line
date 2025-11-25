@@ -6,7 +6,7 @@
 /*   By: adraji <adraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 18:14:25 by adraji            #+#    #+#             */
-/*   Updated: 2025/11/24 19:05:54 by adraji           ###   ########.fr       */
+/*   Updated: 2025/11/25 19:46:00 by adraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,32 @@ size_t	ft_strlen(const char *s)
 	return (len);
 }
 
+char	*ft_strchr(const char *s, int c)
+{
+	if (!s)
+		return (NULL);
+	while (*s)
+	{
+		if (*s == c)
+			return ((char *)s);
+		s++;
+	}
+	if (!c)
+		return ((char *)s);
+	return (NULL);
+}
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	i = 0;
-	size_t	j = 0;
+	size_t	i;
+	size_t	j;
 	char	*s;
 
-	s = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!s1)
+		return (ft_strdup(s2));
+	i = 0;
+	j = 0;
+	s = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!s)
 		return (NULL);
 	while (s1[i])
@@ -36,30 +55,28 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		s[i] = s1[i];
 		i++;
 	}
-	while (s2[j] && s2[j] != '\n')
-	{
-		s[i + j] = s2[j];
-		j++;
-	}
-	s[i + j] = '\0';
+	while (s2[j])
+		s[i++] = s2[j++];
+	s[i] = '\0';
 	return (s);
 }
 
-char	*ft_strmove(char *dest)
+char	*ft_strdup(const char *s1)
 {
-	size_t		i;
-	const char	*src;
+	size_t	i;
+	char	*s;
 
+	if (!s1)
+		return (NULL);
 	i = 0;
-	while (dest[i] != '\n')
-		i++;
-	src = &dest[i + 1];
-	i = 0;
-	while (src[i])
+	s = malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	if (!s)
+		return (NULL);
+	while (s1[i])
 	{
-		dest[i] = src[i];
+		s[i] = s1[i];
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	s[i] = '\0';
+	return (s);
 }
