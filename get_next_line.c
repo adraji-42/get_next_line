@@ -6,7 +6,7 @@
 /*   By: adraji <adraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 11:48:07 by adraji            #+#    #+#             */
-/*   Updated: 2025/11/28 11:46:09 by adraji           ###   ########.fr       */
+/*   Updated: 2025/11/28 19:31:59 by adraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,19 @@ char	*ft_return_null(char *s1, char *s2)
 
 char	*ft_preparation(char **buffer, ssize_t *byte)
 {
-	char	*tmp;
 	char	*line;
 
 	*byte = 1;
-	tmp = ft_strdup("");
-	if (!tmp)
-		return (NULL);
 	if (*buffer)
 	{
-		line = ft_strjoin(tmp, *buffer);
-		free(tmp);
+		line = ft_strjoin("", *buffer);
 		if (!line)
 			return (NULL);
 	}
 	else
 	{
-		line = tmp;
-		*buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+		line = ft_strdup("");
+		*buffer = malloc((size_t)(BUFFER_SIZE + 1) * sizeof(char));
 		if (!*buffer)
 			return (ft_return_null(line, NULL));
 		(*buffer)[0] = '\0';
