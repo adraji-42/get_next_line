@@ -6,7 +6,7 @@
 /*   By: adraji <adraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 18:14:29 by adraji            #+#    #+#             */
-/*   Updated: 2025/11/28 19:33:53 by adraji           ###   ########.fr       */
+/*   Updated: 2025/11/29 15:46:01 by adraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 2000000
 # endif
 
 # include <stdio.h>

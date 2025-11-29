@@ -6,7 +6,7 @@
 /*   By: adraji <adraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 11:48:07 by adraji            #+#    #+#             */
-/*   Updated: 2025/11/28 19:37:13 by adraji           ###   ########.fr       */
+/*   Updated: 2025/11/29 15:30:13 by adraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ char	*ft_return_null(char *s1, char *s2)
 	if (s1)
 		free(s1);
 	if (s2)
+	{
 		free(s2);
+		s2 = NULL;
+	}
 	return (NULL);
 }
 
@@ -36,8 +39,8 @@ char	*ft_preparation(char **buffer, ssize_t *byte)
 	{
 		line = ft_strdup("");
 		*buffer = malloc((size_t)(BUFFER_SIZE + 1) * sizeof(char));
-		if (!*buffer)
-			return (ft_return_null(line, NULL));
+		if (!*buffer || !line)
+			return (ft_return_null(line, *buffer));
 		(*buffer)[0] = '\0';
 	}
 	return (line);
@@ -54,7 +57,7 @@ char	*ft_line(int fd, char **new_line)
 	line = ft_preparation(&buffer[fd], &byte_read);
 	if (!line)
 		return (NULL);
-	while (!(*new_line = ft_strchr(buffer[fd], '\n')) && byte_read)
+	while (!(*new_line = ft_strchr(buffer[fd], '\n')) && byte_read < 1)
 	{
 		tmp = line;
 		byte_read = read(fd, buffer[fd], BUFFER_SIZE);
@@ -67,7 +70,7 @@ char	*ft_line(int fd, char **new_line)
 		free(tmp);
 	}
 	if (!*new_line)
-		buffer[fd] = ft_return_null(buffer[fd], NULL);
+		ft_return_null(NULL, buffer[fd]);
 	else
 		ft_strcpy_rest(buffer[fd], &new_line[0][1]);
 	return (line);

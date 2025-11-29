@@ -6,7 +6,7 @@
 /*   By: adraji <adraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 18:14:29 by adraji            #+#    #+#             */
-/*   Updated: 2025/11/28 11:47:13 by adraji           ###   ########.fr       */
+/*   Updated: 2025/11/29 15:30:50 by adraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 2000000
 # endif
 
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
