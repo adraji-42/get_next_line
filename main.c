@@ -16,7 +16,7 @@ int	main() {
 		i++;
 		printf("%d: %s", i, line);
 		free(line);
-		line = get_next_line(10);
+		line = get_next_line(fd);
 	}
 	free(line);
 	close(fd);
