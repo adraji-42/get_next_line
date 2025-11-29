@@ -6,7 +6,7 @@
 /*   By: adraji <adraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 11:48:07 by adraji            #+#    #+#             */
-/*   Updated: 2025/11/29 15:44:21 by adraji           ###   ########.fr       */
+/*   Updated: 2025/11/29 16:27:10 by adraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,24 @@ char	*ft_return_null(char *s1, char *s2)
 
 char	*ft_preparation(char **buffer, ssize_t *byte)
 {
-	char	*ft;
+	char	*line;
 
 	*byte = 1;
 	if (*buffer)
 	{
-		ft = ft_strjoin("", *buffer);
-		if (!ft)
+		line = ft_strjoin("", *buffer);
+		if (!line)
 			return (NULL);
 	}
 	else
 	{
-		ft = ft_strdup("");
+		line = ft_strdup("");
 		*buffer = malloc((size_t)(BUFFER_SIZE + 1) * sizeof(char));
 		if (!*buffer)
-			return (ft_return_null(ft, NULL));
+			return (ft_return_null(line, NULL));
 		(*buffer)[0] = '\0';
 	}
-	return (ft);
+	return (line);
 }
 
 
@@ -60,9 +60,10 @@ char	*ft_line(int fd, char **new_line)
 	ft = ft_preparation(&buffer, &byte_read);
 	if (!ft)
 		return (NULL);
-	while (!(*new_line = ft_strchr(buffer, '\n')) && (byte_read = read(fd, buffer, BUFFER_SIZE)))
+	while (!(*new_line = ft_strchr(buffer, '\n')) && byte_read > 0)
 	{
 		tmp = ft;
+		byte_read = read(fd, buffer, BUFFER_SIZE);
 		if (byte_read < 0)
 			return (ft_return_null(ft, buffer));
 		buffer[byte_read] = '\0';
