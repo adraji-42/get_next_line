@@ -6,17 +6,17 @@
 int	main() {
 	clock_t start, end;
 	double cpu_time_used;
-		int i = 0;
-
+	
 	start = clock();
+	int i = 0;
 	int fd = open("almoharaf.txt", O_RDONLY);
 	char *line = get_next_line(fd);
 	while (line)
 	{
+		i++;
 		printf("%d: %s", i, line);
 		free(line);
 		line = get_next_line(10);
-		i++;
 	}
 	free(line);
 	close(fd);
