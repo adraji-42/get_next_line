@@ -6,7 +6,7 @@
 /*   By: adraji <adraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 11:48:07 by adraji            #+#    #+#             */
-/*   Updated: 2025/11/28 19:17:59 by adraji           ###   ########.fr       */
+/*   Updated: 2025/11/28 19:37:13 by adraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,28 @@ char	*ft_line(int fd, char **new_line)
 {
 	char		*tmp;
 	char		*line;
-	static char	*buffer;
+	static char	*buffer[1024];
 	ssize_t		byte_read;
 
-	line = ft_preparation(&buffer, &byte_read);
+	line = ft_preparation(&buffer[fd], &byte_read);
 	if (!line)
 		return (NULL);
-	while (!(*new_line = ft_strchr(buffer, '\n')) && byte_read)
+	while (!(*new_line = ft_strchr(buffer[fd], '\n')) && byte_read)
 	{
 		tmp = line;
-		byte_read = read(fd, buffer, BUFFER_SIZE);
+		byte_read = read(fd, buffer[fd], BUFFER_SIZE);
 		if (byte_read < 0)
-			return (ft_return_null(line, buffer));
-		buffer[byte_read] = '\0';
-		line = ft_strjoin(tmp, buffer);
+			return (ft_return_null(line, buffer[fd]));
+		buffer[fd][byte_read] = '\0';
+		line = ft_strjoin(tmp, buffer[fd]);
 		if (!line)
-			return (ft_return_null(tmp, buffer));
+			return (ft_return_null(tmp, buffer[fd]));
 		free(tmp);
 	}
 	if (!*new_line)
-		buffer = ft_return_null(buffer, NULL);
+		buffer[fd] = ft_return_null(buffer[fd], NULL);
 	else
-		ft_strcpy_rest(buffer, &new_line[0][1]);
+		ft_strcpy_rest(buffer[fd], &new_line[0][1]);
 	return (line);
 }
 
