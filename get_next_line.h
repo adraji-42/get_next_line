@@ -6,7 +6,7 @@
 /*   By: adraji <adraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 18:14:29 by adraji            #+#    #+#             */
-/*   Updated: 2025/11/29 16:48:51 by adraji           ###   ########.fr       */
+/*   Updated: 2025/11/30 18:09:27 by adraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,11 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s1);
 char	*ft_strchr(const char *s, int c);
 void	ft_strcpy_rest(char *dest, char *src);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(const char *s1, const char *s2);
 
 #endif

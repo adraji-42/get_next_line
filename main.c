@@ -1,4 +1,4 @@
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <time.h>
@@ -16,8 +16,7 @@ int	main() {
 		i++;
 		printf("%d: %s", i, line);
 		free(line);
-		// line = get_next_line(fd); mandatory
-		// line = get_next_line(9); bonus
+		line = get_next_line(fd);
 	}
 	free(line);
 	close(fd);

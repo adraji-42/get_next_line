@@ -6,28 +6,13 @@
 /*   By: adraji <adraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 11:48:07 by adraji            #+#    #+#             */
-/*   Updated: 2025/11/29 16:29:18 by adraji           ###   ########.fr       */
+/*   Updated: 2025/11/30 18:07:57 by adraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_return_null(char *s1, char *s2)
-{
-	if (s1)
-	{
-		free(s1);
-		s2 = NULL;
-	}
-	if (s2)
-	{
-		free(s2);
-		s2 = NULL;
-	}
-	return (NULL);
-}
-
-char	*ft_preparation(char **buffer, ssize_t *byte)
+char	*ft_preparation(char **buffer, ssize_t *byte, char **new_line)
 {
 	char	*line;
 
@@ -42,13 +27,13 @@ char	*ft_preparation(char **buffer, ssize_t *byte)
 	{
 		line = ft_strdup("");
 		*buffer = malloc((size_t)(BUFFER_SIZE + 1) * sizeof(char));
-		if (!*buffer)
-			return (ft_return_null(line, NULL));
+		if (!*buffer || !line)
+			return (free(buffer), buffer = NULL, free(line), NULL);
 		(*buffer)[0] = '\0';
 	}
+	*new_line = ft_strchr(*buffer, '\n');
 	return (line);
 }
-
 
 char	*ft_line(int fd, char **new_line)
 {
@@ -57,25 +42,25 @@ char	*ft_line(int fd, char **new_line)
 	static char	*buffer;
 	ssize_t		byte_read;
 
-	line = ft_preparation(&buffer, &byte_read);
+	line = ft_preparation(&buffer, &byte_read, new_line);
 	if (!line)
 		return (NULL);
-	while (!(*new_line = ft_strchr(buffer, '\n')) && byte_read > 0)
+	while (!*new_line && byte_read > 0)
 	{
 		tmp = line;
 		byte_read = read(fd, buffer, BUFFER_SIZE);
 		if (byte_read < 0)
-			return (ft_return_null(line, buffer));
+		return (free(buffer), buffer = NULL, free(line), NULL);
 		buffer[byte_read] = '\0';
 		line = ft_strjoin(tmp, buffer);
-		if (!line)
-			return (ft_return_null(tmp, buffer));
 		free(tmp);
+		if (!line)
+			return (free(buffer), buffer = NULL, NULL);
+		*new_line = ft_strchr(buffer, '\n');
 	}
 	if (!*new_line)
-		buffer = ft_return_null(buffer, NULL);
-	else
-		ft_strcpy_rest(buffer, &new_line[0][1]);
+		return (free(buffer), buffer = NULL, line);
+	ft_strcpy_rest(buffer, &new_line[0][1]);
 	return (line);
 }
 
@@ -89,6 +74,6 @@ char	*get_next_line(int fd)
 	new_line = NULL;
 	line = ft_line(fd, &new_line);
 	if (!line || !*line)
-		return (ft_return_null(line, NULL));
+		return (free(line), NULL);
 	return (line);
 }

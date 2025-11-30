@@ -6,7 +6,7 @@
 /*   By: adraji <adraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 18:14:25 by adraji            #+#    #+#             */
-/*   Updated: 2025/11/28 11:35:58 by adraji           ###   ########.fr       */
+/*   Updated: 2025/11/30 18:09:15 by adraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@ size_t	ft_strlen(const char *s)
 	len = 0;
 	while (s[len] && s[len] != '\n')
 		len++;
-	if (s[len] == '\n')
-		len++;
+	len += (s[len] == '\n');
 	return (len);
 }
 
 char	*ft_strdup(const char *s1)
 {
 	size_t	i;
-	char    *s;
+	char	*s;
 
 	if (!s1)
 		return (NULL);
@@ -44,7 +43,7 @@ char	*ft_strdup(const char *s1)
 	return (s);
 }
 
-char    *ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	if (!s)
 		return (NULL);
@@ -58,6 +57,7 @@ char    *ft_strchr(const char *s, int c)
 		return ((char *)s);
 	return (NULL);
 }
+
 void	ft_strcpy_rest(char *dest, char *src)
 {
 	size_t	i;
@@ -73,7 +73,7 @@ void	ft_strcpy_rest(char *dest, char *src)
 	dest[i] = '\0';
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
 	size_t	len[2];
 	size_t	i[2];
