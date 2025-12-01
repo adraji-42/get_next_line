@@ -6,73 +6,61 @@
 /*   By: adraji <adraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 11:48:07 by adraji            #+#    #+#             */
-/*   Updated: 2025/12/01 10:36:07 by adraji           ###   ########.fr       */
+/*   Updated: 2025/12/01 14:40:30 by adraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_preparation(char **buffer, ssize_t *byte, char **new_line)
-{
-	char	*line;
-
-	*byte = 1;
-	if (*buffer)
-	{
-		line = ft_strjoin("", *buffer);
-		if (!line)
-			return (NULL);
-	}
-	else
-	{
-		line = ft_strdup("");
-		*buffer = malloc((size_t)(BUFFER_SIZE + 1) * sizeof(char));
-		if (!*buffer || !line)
-			return (free(buffer), buffer = NULL, free(line), NULL);
-		(*buffer)[0] = '\0';
-	}
-	*new_line = ft_strchr(*buffer, '\n');
-	return (line);
-}
-
-char	*ft_line(int fd, char **new_line)
+char	*ft_line(int fd, char **buffer, char *line)
 {
 	char		*tmp;
-	char		*line;
-	static char	*buffer;
+	char		*new_line;
 	ssize_t		byte_read;
 
-	line = ft_preparation(&buffer, &byte_read, new_line);
-	if (!line)
-		return (NULL);
-	while (!*new_line && byte_read > 0)
+	byte_read = 1;
+	new_line = ft_strchr(*buffer, '\n');
+	while (!new_line && byte_read > 0)
 	{
 		tmp = line;
-		byte_read = read(fd, buffer, BUFFER_SIZE);
+		byte_read = read(fd, *buffer, BUFFER_SIZE);
 		if (byte_read < 0)
-			return (free(buffer), buffer = NULL, free(line), NULL);
-		buffer[byte_read] = '\0';
-		line = ft_strjoin(tmp, buffer);
+			return (free(*buffer), free(line), (*buffer = NULL));
+		(*buffer)[byte_read] = '\0';
+		line = ft_strjoin(tmp, *buffer);
 		free(tmp);
 		if (!line)
-			return (free(buffer), buffer = NULL, NULL);
-		*new_line = ft_strchr(buffer, '\n');
+			return (free(*buffer), *buffer = NULL, NULL);
+		new_line = ft_strchr(*buffer, '\n');
 	}
-	if (!*new_line)
-		return (free(buffer), buffer = NULL, line);
-	ft_strcpy_rest(buffer, &new_line[0][1]);
+	if (!new_line)
+		return (free(*buffer), *buffer = NULL, line);
+	ft_strcpy_rest(*buffer, &new_line[1]);
 	return (line);
 }
 
 char	*get_next_line(int fd)
 {
 	char		*line;
-	char		*new_line;
+	static char	*buffer;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	new_line = NULL;
-	line = ft_line(fd, &new_line);
+	if (buffer)
+	{
+		line = ft_strdup(buffer);
+		if (!line)
+			return (free(buffer), (buffer = NULL));
+	}
+	else
+	{
+		line = ft_strdup("");
+		buffer = malloc(((size_t) BUFFER_SIZE + 1) * sizeof(char));
+		if (!buffer || !line)
+			return (free(buffer), free(line), (buffer = NULL));
+		buffer[0] = '\0';
+	}
+	line = ft_line(fd, &buffer, line);
 	if (!line || !*line)
 		return (free(line), NULL);
 	return (line);
