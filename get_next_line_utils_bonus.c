@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adraji <adraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/14 18:14:25 by adraji            #+#    #+#             */
-/*   Updated: 2025/12/01 10:32:35 by adraji           ###   ########.fr       */
+/*   Created: 2025/11/05 16:40:47 by adraji            #+#    #+#             */
+/*   Updated: 2025/12/01 10:47:22 by adraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -27,14 +27,16 @@ char	*ft_strdup(const char *s1)
 {
 	size_t	i;
 	char	*s;
+	size_t	len;
 
 	if (!s1)
 		return (NULL);
-	s = malloc(ft_strlen(s1) + 1);
+	len = ft_strlen(s1);
+	s = malloc((len + 1) * sizeof(char));
 	if (!s)
 		return (NULL);
 	i = 0;
-	while (s1[i])
+	while (i < len)
 	{
 		s[i] = s1[i];
 		i++;

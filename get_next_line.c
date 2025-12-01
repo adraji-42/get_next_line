@@ -6,7 +6,7 @@
 /*   By: adraji <adraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 11:48:07 by adraji            #+#    #+#             */
-/*   Updated: 2025/11/30 18:07:57 by adraji           ###   ########.fr       */
+/*   Updated: 2025/12/01 10:36:07 by adraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ft_line(int fd, char **new_line)
 		tmp = line;
 		byte_read = read(fd, buffer, BUFFER_SIZE);
 		if (byte_read < 0)
-		return (free(buffer), buffer = NULL, free(line), NULL);
+			return (free(buffer), buffer = NULL, free(line), NULL);
 		buffer[byte_read] = '\0';
 		line = ft_strjoin(tmp, buffer);
 		free(tmp);
