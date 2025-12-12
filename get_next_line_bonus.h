@@ -17,7 +17,9 @@
 #  define BUFFER_SIZE 200
 # endif
 
-# define OPEN_MAX 1024
+# ifndef OPEN_MAX
+#  define OPEN_MAX 1024
+# endif
 
 # include <stdio.h>
 # include <unistd.h>
