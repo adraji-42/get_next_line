@@ -6,7 +6,7 @@
 /*   By: adraji <adraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 11:48:07 by adraji            #+#    #+#             */
-/*   Updated: 2025/12/01 14:40:30 by adraji           ###   ########.fr       */
+/*   Updated: 2025/12/12 08:58:13 by adraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_line(int fd, char **buffer, char *line)
 		line = ft_strjoin(tmp, *buffer);
 		free(tmp);
 		if (!line)
-			return (free(*buffer), *buffer = NULL, NULL);
+			return (free(*buffer), (*buffer = NULL));
 		new_line = ft_strchr(*buffer, '\n');
 	}
 	if (!new_line)

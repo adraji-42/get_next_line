@@ -6,7 +6,7 @@
 /*   By: adraji <adraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 18:14:25 by adraji            #+#    #+#             */
-/*   Updated: 2025/12/01 14:49:54 by adraji           ###   ########.fr       */
+/*   Updated: 2025/12/12 08:59:13 by adraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,26 +77,26 @@ void	ft_strcpy_rest(char *dest, char *src)
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {
-	size_t	len[2];
-	size_t	i[2];
-	char	*s;
+	size_t	i;
+	size_t	j;
+	size_t	len;
+	char	*str;
 
 	if (!s1 || !s2)
 		return (NULL);
-	len[0] = ft_strlen(s1);
-	len[1] = ft_strlen(s2);
-	s = malloc(sizeof(char) * (len[0] + len[1] + 1));
-	if (!s)
+	len = ft_strlen(s2);
+	str = malloc(sizeof(char) * (ft_strlen(s1) + len + 1));
+	if (!str)
 		return (NULL);
-	i[0] = 0;
-	while (i[0] < len[0])
+	i = 0;
+	while (s1[i])
 	{
-		s[i[0]] = s1[i[0]];
-		i[0]++;
+		str[i] = s1[i];
+		i++;
 	}
-	i[1] = 0;
-	while (i[1] < len[1])
-		s[i[0]++] = s2[i[1]++];
-	s[i[0]] = '\0';
-	return (s);
+	j = 0;
+	while (j < len)
+		str[i++] = s2[j++];
+	str[i] = '\0';
+	return (str);
 }
