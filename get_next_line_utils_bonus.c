@@ -6,7 +6,7 @@
 /*   By: adraji <adraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 16:40:47 by adraji            #+#    #+#             */
-/*   Updated: 2025/12/01 10:47:22 by adraji           ###   ########.fr       */
+/*   Updated: 2025/12/19 15:52:12 by adraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	*ft_strjoin_nl(const char *s1, const char *s2)
 	if (!s)
 		return (NULL);
 	i[0] = 0;
-	while (i[0] < len[0])
+	while (i[0] < len)
 	{
 		s[i[0]] = s1[i[0]];
 		i[0]++;

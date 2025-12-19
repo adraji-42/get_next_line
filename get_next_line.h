@@ -6,7 +6,7 @@
 /*   By: adraji <adraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 18:14:29 by adraji            #+#    #+#             */
-/*   Updated: 2025/12/01 14:44:52 by adraji           ###   ########.fr       */
+/*   Updated: 2025/12/19 15:50:35 by adraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 
 char	*get_next_line(int fd);
 size_t	ft_strlen_nl(const char *s);
-char	*ft_strdup_nl(const char *s1);
 char	*ft_strchr_nl(const char *s);
+char	*ft_strdup_nl(const char *s1);
 void	ft_strcpy(char *dest, char *src);
 char	*ft_strjoin_nl(char const *s1, const char *s2);
 
