@@ -22,10 +22,10 @@
 # include <stdlib.h>
 
 char	*get_next_line(int fd);
-size_t	ft_strlen(const char *s);
-char	*ft_strdup(const char *s1);
-char	*ft_strchr(const char *s, int c);
-void	ft_strcpy_rest(char *dest, char *src);
-char	*ft_strjoin(char const *s1, const char *s2);
+size_t	ft_strlen_nl(const char *s);
+char	*ft_strdup_nl(const char *s1);
+char	*ft_strchr_nl(const char *s);
+void	ft_strcpy(char *dest, char *src);
+char	*ft_strjoin_nl(char const *s1, const char *s2);
 
 #endif
