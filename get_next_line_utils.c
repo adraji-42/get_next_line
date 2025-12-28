@@ -75,25 +75,21 @@ void	ft_strcpy(char *dest, char *src)
 
 char	*ft_strjoin_nl(const char *s1, const char *s2)
 {
+	size_t	i;
 	char	*s;
 	size_t	len;
-	size_t	i[2];
 
 	if (!s1 || !s2)
 		return (NULL);
-	len = ft_strlen_nl(s2);
-	s = malloc(sizeof(char) * (ft_strlen_nl(s1) + len + 1));
+	len = ft_strlen_nl(s1) + ft_strlen_nl(s2);
+	s = malloc(sizeof(char) * (len + 1));
 	if (!s)
 		return (NULL);
-	i[0] = 0;
-	while (i[0] < len)
-	{
-		s[i[0]] = s1[i[0]];
-		i[0]++;
-	}
-	i[1] = 0;
-	while (i[1] < len)
-		s[i[0]++] = s2[i[1]++];
-	s[i[0]] = '\0';
+	i = 0;
+	while (*s1)
+		s[i++] = *s1++;
+	while (i < len)
+		s[i++] = *s2++;
+	s[i] = '\0';
 	return (s);
 }
